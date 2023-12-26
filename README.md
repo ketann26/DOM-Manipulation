@@ -4,7 +4,7 @@ Basically what React does is simplify the process of DOM Manipulation and let th
 
 I have built a simple to-do app using 2 methods:
 
-First using vanilla JS in [index.js](index.js),
+First using vanilla JS in [index.html](index.html),
 
 and the second as an SPA using React.
 

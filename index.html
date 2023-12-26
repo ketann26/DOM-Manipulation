@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <title>Todo App</title>
+    <style>
+      body {
+        background-color: bisque;
+        font-size: large;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      h1 {
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        margin: 10vh 20vw;
+      }
+
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 30%;
+      }
+
+      .input-container input {
+        margin-bottom: 10px;
+      }
+
+      .todo-container {
+        margin: 10px 10%;
+        border: 1px solid gray;
+        padding: 10px 20px;
+      }
+
+      .todo-container div {
+        margin-bottom: 10px;
+      }
+
+      .todo-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .todo-description {
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Todo App</h1>
+      <div class="input-container">
+        <input type="text" id="title" placeholder="Title" />
+        <input type="text" id="description" placeholder="Description" />
+        <button onclick="addTodo()">Add Todo</button>
+      </div>
+
+      <div id="container" class="todo-container"></div>
+    </div>
+
+    <script>
+      let globalId = 1;
+
+      function createChild(title, description, id) {
+        const newTodo = document.createElement("div");
+
+        const titleChild = document.createElement("div");
+        titleChild.innerHTML = title;
+        titleChild.setAttribute("class", "todo-title");
+
+        const descriptionChild = document.createElement("div");
+        descriptionChild.innerHTML = description;
+        descriptionChild.setAttribute("class", "todo-description");
+
+        const completedButtonChild = document.createElement("button");
+        completedButtonChild.innerHTML = "Mark as Done";
+        completedButtonChild.setAttribute("onclick", `removeTodo(${id})`);
+
+        newTodo.appendChild(titleChild);
+        newTodo.appendChild(descriptionChild);
+        newTodo.appendChild(completedButtonChild);
+        newTodo.setAttribute("id", `todo${id}`);
+
+        return newTodo;
+      }
+
+      function addTodo() {
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+
+        const parent = document.getElementById("container");
+        const newTodo = createChild(title, description, globalId++);
+        parent.appendChild(newTodo);
+      }
+
+      function removeTodo(id) {
+        const element = document.getElementById(`todo${id}`);
+        element.remove();
+      }
+    </script>
+  </body>
+</html>
